@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Component } from '@angular/core';
+import {
+    select,
+    Store,
+} from '@ngrx/store';
 
 @Component({
   selector: 'app-restaurant',
   templateUrl: './restaurant.component.html',
-  styleUrls: ['./restaurant.component.scss']
+  styleUrls: ['./restaurant.component.scss'],
 })
-export class RestaurantComponent implements OnInit {
+export class RestaurantComponent {
+  cart$: Observable<number[]>;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private store: Store<any>) {
+    this.cart$ = this.store.pipe(select('cart'));
   }
-
 }
